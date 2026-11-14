@@ -10,7 +10,7 @@
 .theme-tool{position:fixed;z-index:35;right:18px;top:90px;width:250px;background:rgba(11,13,17,.9);border:1px solid var(--border);backdrop-filter:blur(14px);padding:12px 14px 15px;box-shadow:0 4px 23px #0008}.theme-tool .tool-head{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:800}.theme-tool input{width:100%;accent-color:var(--accent);margin-top:12px;height:15px}.theme-rainbow{height:7px;margin-top:5px;background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,magenta,red);border-radius:8px}.theme-tool button{border:0;background:none;color:var(--dim);padding:5px;font-size:12px}
 @media(max-width:1050px){.hero-inner{grid-template-columns:1fr 1fr}.roster{grid-template-columns:repeat(4,1fr)}.server,.ranking-grid,.vip-grid{grid-template-columns:1fr}.nav a{padding:9px}.theme-tool{top:auto;bottom:12px;right:12px}}@media(max-width:760px){.wrap{padding:0 18px}.headin{flex-direction:column;align-items:start;padding:10px 0}.nav{gap:2px}.hero-inner{grid-template-columns:1fr;padding-top:65px}.hero-logo-box{grid-row:1;width:75%;max-width:380px}.hero{min-height:0}.hero-inner{min-height:0}.hero h1{font-size:66px}.hero p{font-size:18px}.server-stats,.roster{grid-template-columns:repeat(2,1fr)}.community{grid-template-columns:1fr}.heading{align-items:start;flex-direction:column}.heading h2{font-size:45px}.theme-tool{width:210px}.plans{grid-template-columns:1fr}.unit{min-height:190px}}@media(max-width:440px){.server-stats{grid-template-columns:repeat(2,1fr)}.roster{gap:9px}.unit{padding:12px}.unit-art svg{width:110px}.unit strong{font-size:22px}.icon-detail{flex-direction:column;align-items:start}.facts{grid-template-columns:1fr}.theme-tool{width:185px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 .social-community{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.social-card{display:flex;flex-direction:column;gap:16px;padding:30px;min-height:255px;transition:transform .25s,border-color .25s,box-shadow .25s}.social-card:hover:not(.social-pending){transform:translateY(-5px);border-color:var(--accent);box-shadow:0 0 27px var(--glow)}.social-card h3{margin:0 0 10px}.social-card p{color:var(--dim);margin:0}.social-brand{width:57px;height:57px;border:1px solid var(--border);background:var(--wash);color:var(--accent);display:grid;place-items:center;font-size:35px;font-weight:800}.social-action{margin-top:auto;color:var(--soft);font-size:15px;font-weight:800;letter-spacing:.12em}.social-pending{opacity:.7;cursor:default}@media(max-width:700px){.social-community{grid-template-columns:1fr}}</style><style>
-/* OUTBREAK V11 - TOP 5 & STEAM PROFILE */
+/* OUTBREAK V12 - TOP 5 & DISCORD PROFILE */
 .profile-pic{position:relative}.profile-icon-chip{position:absolute;right:-8px;bottom:-8px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--accent);background:#0b0e14;box-shadow:0 0 13px var(--glow);font-size:17px;color:var(--soft)}
 .podium-wrap{background:linear-gradient(165deg,hsl(var(--h) 42% 13% / .63),#0b0c11);border:1px solid var(--border);padding:26px 22px 18px;margin:24px 0 26px;box-shadow:0 0 40px var(--glow),inset 0 1px 0 #ffffff0a;border-radius:12px;overflow:hidden}
 .podium-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap}.podium-heading h3{font:800 clamp(26px,4vw,38px) 'Barlow Condensed',Rajdhani,sans-serif;letter-spacing:.05em;margin:4px 0}.podium-heading p{margin:4px 0 14px;color:var(--dim);font-size:16px}.podium-demo{font-size:11px;letter-spacing:.12em;padding:8px;border:1px solid var(--border);color:var(--soft)}
@@ -35,22 +35,22 @@
 <p class="podium-caption">Puestos por puntuación total, no por diferencia proporcional de puntos. Al conectar SourceMod se sustituirán los nombres y puntuaciones.</p>
 </div><div class="ranking-grid"><div class="panel rank-panel"><div class="rankbar"><h3>TOP DE SUPERVIVENCIA</h3><input aria-label="Buscar jugador" id="rankSearch" placeholder="Buscar jugador..." type="search"/></div><div class="unit-tabs" style="margin-bottom:12px"><button class="tab active" data-rank="general">General</button><button class="tab" data-rank="comp">Competitivo</button></div><table class="ranktable"><thead><tr><th>Posición</th><th>Jugador</th><th>Puntos</th><th>Muertes</th></tr></thead><tbody id="rankBody"></tbody></table><p class="mini-label" style="margin-bottom:0;margin-top:16px">Datos ficticios · demostración</p></div><aside class="panel rankaside"><h3 class="side-title">SISTEMA DE RANGOS</h3><div class="badge-title">[ TOP-1 ]</div><p>La primera posición recibe una etiqueta especial en el chat.</p><div class="rank-info"><strong>RANK 2–40</strong><p>Los jugadores del segundo al cuadragésimo puesto muestran su rango al escribir.</p></div><div class="rank-info"><strong>RANK 41+</strong><p>El puesto aparece en la tabla y con <b>!rank</b>, pero no como etiqueta del chat.</p></div><div class="rank-info"><strong>PUNTOS PERMANENTES</strong><p>La puntuación general se conserva, con penalización de −5 por muerte.</p></div></aside></div></div></section>
 <section class="section section-alt" id="perfiles"><div class="wrap">
-<div class="heading reveal"><div><div class="kicker">Identidad de superviviente / 04</div><h2>Tu <span>perfil OUTBREAK</span></h2></div><p>Personalización exclusiva para usuarios que iniciaron sesión con Steam. Un perfil visible para la comunidad, editable solo por su propietario.</p></div>
+<div class="heading reveal"><div><div class="kicker">Identidad de superviviente / 04</div><h2>Tu <span>perfil OUTBREAK</span></h2></div><p>Personalización exclusiva para usuarios que iniciaron sesión con Discord. Un perfil visible para la comunidad, editable solo por su propietario.</p></div>
 <div class="profile-layout">
 <div class="panel profile-card reveal" id="profileCard">
 <div class="profile-cover" id="profileCover"><div class="profile-cover-name">SURVIVE THE OUTBREAK</div></div>
-<div class="profile-details"><div class="profile-pic"><span id="profileAvatarIcon">☣</span><span class="profile-icon-chip" id="profileIconChip">☣</span></div><div><div class="mini-label">OUTBREAK / PERFIL DE JUGADOR</div><h3 id="profileName">Superviviente</h3><p id="profileSteamId">Inicia sesión con Steam para activar tu perfil.</p></div><span class="profile-emblem" id="profileBadge">☣ SUPERVIVIENTE</span></div>
-<div class="profile-strip"><span>◈ Identidad Steam verificada</span><span>✦ Fondo personalizable</span><span>☣ Insignia OUTBREAK</span></div>
+<div class="profile-details"><div class="profile-pic"><span id="profileAvatarIcon">☣</span><span class="profile-icon-chip" id="profileIconChip">☣</span></div><div><div class="mini-label">OUTBREAK / PERFIL DE JUGADOR</div><h3 id="profileName">Superviviente</h3><p id="profileSteamId">Inicia sesión con Discord para activar tu perfil.</p></div><span class="profile-emblem" id="profileBadge">☣ SUPERVIVIENTE</span></div>
+<div class="profile-strip"><span>◈ Identidad Discord verificada</span><span>✦ Fondo personalizable</span><span>☣ Insignia OUTBREAK</span></div>
 </div>
 <aside class="panel profile-editor reveal"><div class="mini-label">PERSONALIZACIÓN PROTEGIDA</div><h3>Tu identidad en OUTBREAK</h3>
-<p id="authMessage">Solo podrás editar el fondo, la insignia y el icono de tu perfil cuando hayas iniciado sesión con Steam. La vista de la izquierda es de demostración.</p>
-<div id="profileLogin"><a class="btn" href="/auth/steam">◈ INICIAR SESIÓN CON STEAM</a><p class="tiny-hint">Este botón requiere ejecutar la versión con servidor web, no el archivo HTML local.</p></div>
+<p id="authMessage">Inicia sesión con Discord para editar tu propio fondo, insignia e icono. Tus cambios se guardarán en Supabase.</p>
+<div id="profileLogin"><button class="btn" id="discordLoginBtn" type="button">◈ INICIAR SESIÓN CON DISCORD</button><p class="tiny-hint">Iniciarás sesión a través de Discord. OUTBREAK no recibe tu contraseña.</p></div>
 <form class="editor-fields" hidden="" id="profileEditor">
 <label>Insignia del servidor<select id="badgeChoice"><option value="survivor">☣ Superviviente</option><option value="veteran">✦ Veterano</option><option value="hunter">⚔ Cazador</option><option value="guardian">⬡ Guardián</option><option value="elite">♛ Élite</option></select></label>
 <label>Icono personal<select id="iconChoice"><option value="biohazard">☣ Biohazard</option><option value="shield">⬡ Escudo</option><option value="blade">⚔ Espadas</option><option value="star">✦ Estrella</option><option value="crown">♛ Corona</option></select></label>
 <label>Fondo de perfil<select id="backgroundChoice"><option value="warcelona">Warcelona</option><option value="smoke">Humo nocturno</option><option value="embers">Brasas</option><option value="steel">Acero oscuro</option></select></label>
 <label>O sube tu fondo personalizado (JPG, PNG, WEBP; máximo 4 MB)<input accept="image/png,image/jpeg,image/webp" id="customBackground" type="file"/></label>
-<div class="buttonline"><button class="btn" type="submit">GUARDAR PERSONALIZACIÓN</button><a class="btn outline" href="/auth/logout">SALIR DE STEAM</a></div>
+<div class="buttonline"><button class="btn" type="submit">GUARDAR PERSONALIZACIÓN</button><button class="btn outline" id="discordLogoutBtn" type="button">CERRAR SESIÓN</button></div>
 <p aria-live="polite" class="tiny-hint" id="profileSaveStatus"></p>
 </form>
 <div class="privacy-note">Las insignias son cosméticas; los rangos TOP-1 y RANK-# los determina exclusivamente el plugin de estadísticas, no el usuario.</div>
@@ -61,7 +61,7 @@
 <section class="section section-alt" id="vip"><div class="wrap"><div class="heading reveal"><div><div class="kicker">Acceso especial / 04</div><h2>Membresía <span>VIP</span></h2></div><p>Un recorrido claro en cuatro pasos para el registro, el pago y la verificación del comprobante. Los precios son ilustrativos.</p></div><div class="vip-grid"><div class="panel vip-form"><div class="vip-steps" id="vipSteps"><div class="step-tag on">01 · Plan</div><div class="step-tag">02 · SteamID</div><div class="step-tag">03 · Pago</div><div class="step-tag">04 · Verificación</div></div><form id="vipForm" novalidate=""><div class="step-pane active" data-step="0"><h3>Selecciona una membresía</h3><div class="plans"><button class="plan selected" data-plan="START" type="button"><b>START</b><span>S/ 10</span><small>15 días · ejemplo</small></button><button class="plan" data-plan="ELITE" type="button"><b>ELITE</b><span>S/ 20</span><small>30 días · ejemplo</small></button><button class="plan" data-plan="SQUAD" type="button"><b>SQUAD</b><span>S/ 35</span><small>Dúo · ejemplo</small></button></div><p style="color:var(--dim);font-size:15px">Los importes y beneficios se confirmarán antes de habilitar pagos reales.</p></div><div class="step-pane" data-step="1"><h3>Identificación del jugador</h3><div class="field"><label for="pname">Nombre dentro del juego</label><input id="pname" maxlength="48" placeholder="Nombre de jugador" required=""/></div><div class="field"><label for="steamid">SteamID</label><input id="steamid" maxlength="64" placeholder="STEAM_1:0:12345678 o SteamID64" required=""/></div></div><div class="step-pane" data-step="2"><h3>Método de pago</h3><div class="field"><label for="paymethod">Elige el método</label><select id="paymethod" required=""><option value="">Seleccionar</option><option value="Yape">Yape</option><option value="Plin">Plin</option><option value="Transferencia">Transferencia bancaria</option></select></div><div class="server-note">Los datos de cobro están pendientes. No realices ningún pago mientras esta web sea una demo.</div></div><div class="step-pane" data-step="3"><h3>Adjunta y verifica</h3><div class="field"><label for="receipt">Captura del comprobante</label><input accept="image/png,image/jpeg,image/webp" id="receipt" required="" type="file"/></div><label class="terms"><input id="acceptTerms" type="checkbox"/><span>He leído y acepto los términos y condiciones. Entiendo que la aprobación depende de la verificación manual y que este formulario es una demostración.</span></label><p style="color:var(--dim);font-size:15px">La prueba no envía ni almacena imágenes. Para recibir comprobantes de verdad hará falta una API segura y un canal privado de revisión.</p></div><div class="wizard-buttons"><button class="btn outline" disabled="" id="prevVip" type="button">← Atrás</button><button class="btn" id="nextVip" type="button">Siguiente →</button></div></form></div><aside class="panel vip-aside"><div class="mini-label">OUTBREAK / BENEFICIOS</div><h3>EVOLUCIONA EN LA HORDA.</h3><div class="benefit"><b>✦ Menú de equipamiento VIP</b><p>Opciones y límites configurados desde SourceMod.</p></div><div class="benefit"><b>✦ Recursos con tiempos de espera</b><p>Controles antispam y beneficios sujetos a las reglas del servidor.</p></div><div class="benefit"><b>✦ Identidad exclusiva</b><p>Etiqueta y reconocimiento para miembros activos.</p></div><div class="benefit"><b>✦ Activación manual</b><p>Primero se valida el pago; después se activa la cuenta VIP.</p></div></aside></div></div></section>
 <section class="section" id="comunidad"><div class="wrap"><div class="heading reveal"><div><div class="kicker">Conecta con la comunidad / 05</div><h2>Nuestra <span>comunidad</span></h2></div><p>Accede a nuestros espacios oficiales. Por ahora, Discord está disponible y el grupo de Steam se añadirá próximamente.</p></div><div class="community social-community"><a class="panel social-card" href="https://discord.gg/9QwFddVWd" rel="noopener noreferrer" target="_blank"><div class="social-brand discord-symbol">◈</div><div><h3>Discord OUTBREAK</h3><p>Únete a nuestro Discord para conversar con la comunidad.</p></div><span class="social-action">ENTRAR A DISCORD ↗</span></a><div class="panel social-card social-pending"><div class="social-brand steam-symbol">◎</div><div><h3>Grupo de Steam</h3><p>Enlace pendiente de agregar.</p></div><span class="social-action">PRÓXIMAMENTE</span></div></div></div></section></main>
 <footer class="foot">© 2026 OUTBREAK · Portal comunitario para Left 4 Dead 2 · Prototipo de interfaz</footer><div aria-live="polite" id="toast" role="status"></div>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>
 'use strict';
 const silhouettes={
  hunter:'<path d="M39 96 Q38 67 58 48 L77 42 L92 54 L106 85 L126 96 L111 103 L85 93 L65 101 L54 124 L24 129 L19 121 L43 107Z"/><path d="M48 62 L32 86 L13 93 L17 101 L41 92 L60 79"/><circle cx="72" cy="36" r="17"/>',
@@ -108,32 +108,101 @@ document.querySelectorAll('[data-podiummode]').forEach(b=>b.addEventListener('cl
 }));
 document.querySelectorAll('[data-rank]').forEach(b=>b.addEventListener('click',()=>setTimeout(makePodium,0)));
 makePodium();
+const SUPABASE_URL='https://iiavzxgblffistgpitne.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_JA7C2-G4-pbMj8R7qEzTCA_1uqQaWMs';
+const REDIRECT_URL='https://jaredjotak.github.io/outbreak-web/';
 const symbols={biohazard:'☣',shield:'⬡',blade:'⚔',star:'✦',crown:'♛'};
 const badges={survivor:'☣ SUPERVIVIENTE',veteran:'✦ VETERANO',hunter:'⚔ CAZADOR',guardian:'⬡ GUARDIÁN',elite:'♛ ÉLITE'};
 const displayCover=document.getElementById('profileCover'),editor=document.getElementById('profileEditor'),login=document.getElementById('profileLogin');
-let csrf='';let currentProfile=null;
+const notice=document.getElementById('authMessage'),saveStatus=document.getElementById('profileSaveStatus');
+const allowed={badge:['survivor','veteran','hunter','guardian','elite'],icon:['biohazard','shield','blade','star','crown'],background:['warcelona','smoke','embers','steel','custom']};
+let sb=null,currentUser=null,currentProfile=null;
+const msg=(s)=>{notice.textContent=s;};
 function setProfile(p){currentProfile=p;
- document.getElementById('profileName').textContent=p.personaName||'Jugador de Steam';document.getElementById('profileSteamId').textContent=p.steamId||'';
+ document.getElementById('profileName').textContent=p.persona_name||'Jugador de Discord';
+ document.getElementById('profileSteamId').textContent=p.discord_id ? 'Discord ID: '+p.discord_id : 'Cuenta Discord vinculada';
  document.getElementById('profileBadge').textContent=badges[p.badge]||badges.survivor;
- const avatar=document.getElementById('profileAvatarIcon');avatar.textContent=symbols[p.icon]||symbols.biohazard;document.getElementById('profileIconChip').textContent=symbols[p.icon]||symbols.biohazard;
- if(p.avatar){avatar.innerHTML='';const pic=document.createElement('img');pic.src=p.avatar;pic.alt='Avatar de Steam';avatar.append(pic)}
+ const avatar=document.getElementById('profileAvatarIcon');avatar.textContent=symbols[p.icon]||symbols.biohazard;
+ document.getElementById('profileIconChip').textContent=symbols[p.icon]||symbols.biohazard;
+ if(p.avatar && /^https:\/\//.test(p.avatar)){avatar.replaceChildren();const pic=document.createElement('img');pic.src=p.avatar;pic.alt='Avatar de Discord';avatar.append(pic)}
  displayCover.dataset.bg=p.background||'warcelona';displayCover.style.backgroundImage='';
- if(p.backgroundUrl){displayCover.style.backgroundImage='linear-gradient(0deg,#0c0d13e0,#13162020),url('+JSON.stringify(p.backgroundUrl)+')';}
- document.getElementById('badgeChoice').value=p.badge||'survivor';document.getElementById('iconChoice').value=p.icon||'biohazard';document.getElementById('backgroundChoice').value=['warcelona','smoke','embers','steel'].includes(p.background)?p.background:'warcelona';
+ if(p.background==='custom' && p.background_url && /^https:\/\//.test(p.background_url)){
+  displayCover.style.backgroundImage='linear-gradient(0deg,#0c0d13e0,#13162020),url('+JSON.stringify(p.background_url)+')';
+ }
+ document.getElementById('badgeChoice').value=allowed.badge.includes(p.badge)?p.badge:'survivor';
+ document.getElementById('iconChoice').value=allowed.icon.includes(p.icon)?p.icon:'biohazard';
+ const choice=document.getElementById('backgroundChoice'); const old=choice.querySelector('option[value=custom]'); if(p.background==='custom' && !old) choice.add(new Option('Fondo personalizado actual','custom')); if(p.background!=='custom' && old)old.remove(); choice.value=allowed.background.includes(p.background)?p.background:'warcelona';
 }
-async function start(){try{const response=await fetch('/api/me',{credentials:'same-origin'});if(!response.ok)throw new Error('API no disponible');const data=await response.json();
- if(!data.authenticated){document.getElementById('authMessage').textContent='Inicia sesión con Steam para desbloquear la personalización de tu perfil.';return;}
- csrf=data.csrf;login.hidden=true;editor.hidden=false;document.getElementById('authMessage').textContent='Sesión de Steam verificada. Solo tú puedes guardar cambios en este perfil.';setProfile(data.profile);
- }catch(e){document.getElementById('authMessage').textContent='Vista previa local: el editor está bloqueado. Para editar necesitas publicar y ejecutar el servidor de autenticación Steam incluido en el ZIP.';}}
-editor.addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('profileSaveStatus');status.textContent='Guardando perfil...';
- try{const response=await fetch('/api/profile',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({badge:document.getElementById('badgeChoice').value,icon:document.getElementById('iconChoice').value,background:document.getElementById('backgroundChoice').value})});
- const data=await response.json();if(!response.ok)throw Error(data.error||'No se pudo guardar');setProfile(data.profile);status.textContent='Cambios guardados.';
- }catch(err){status.textContent=err.message}}
-);
+function profileFromUser(u){
+ const meta=u.user_metadata||{};
+ return {id:u.id,discord_id:String(meta.provider_id||meta.sub||''),persona_name:String(meta.full_name||meta.name||meta.user_name||meta.preferred_username||'Jugador de Discord').slice(0,80),avatar:String(meta.avatar_url||meta.picture||'').slice(0,500),badge:'survivor',icon:'biohazard',background:'warcelona',background_url:''};
+}
+async function syncProfile(u){
+ const {data, error}=await sb.from('profiles').select('*').eq('id',u.id).maybeSingle();
+ if(error)throw error;
+ if(data)return data;
+ const baseline=profileFromUser(u);
+ const {data:created,error:insertError}=await sb.from('profiles').insert(baseline).select().single();
+ if(insertError){const again=await sb.from('profiles').select('*').eq('id',u.id).maybeSingle();if(!again.error&&again.data)return again.data;throw insertError;}
+ return created;
+}
+async function refreshSession(){
+ if(!sb)return;
+ const {data,error}=await sb.auth.getUser();
+ if(error && !/Auth session missing/i.test(error.message||'')){msg('No se pudo comprobar la sesión de Discord: '+error.message);return;}
+ const u=data?.user||null;
+ currentUser=u;
+ if(!u){login.hidden=false;editor.hidden=true;msg('Inicia sesión con Discord para personalizar tu perfil.');return;}
+ try{
+  const profile=await syncProfile(u);
+  login.hidden=true;editor.hidden=false;
+  msg('Sesión de Discord verificada. Tus cambios se guardan en tu perfil personal.');
+  setProfile(profile);
+ }catch(e){login.hidden=true;editor.hidden=true;msg('Discord conectado, pero falta configurar la tabla «profiles» en Supabase. '+e.message);}
+}
+document.getElementById('discordLoginBtn').addEventListener('click',async()=>{
+ if(!sb){msg('No se pudo cargar Supabase. Comprueba tu conexión.');return;}
+ const {error}=await sb.auth.signInWithOAuth({provider:'discord',options:{redirectTo:REDIRECT_URL,scopes:'identify'}});
+ if(error)msg('Error al conectar Discord: '+error.message);
+});
+document.getElementById('discordLogoutBtn').addEventListener('click',async()=>{
+ if(!sb)return;
+ const {error}=await sb.auth.signOut();
+ if(error){saveStatus.textContent='No se pudo cerrar sesión: '+error.message;return;}
+ currentUser=null;currentProfile=null;editor.hidden=true;login.hidden=false;setProfile({persona_name:'Superviviente',badge:'survivor',icon:'biohazard',background:'warcelona'});currentProfile=null;document.getElementById('profileSteamId').textContent='Inicia sesión con Discord para activar tu perfil.';
+ msg('Has cerrado sesión.');saveStatus.textContent='';
+});
+editor.addEventListener('submit',async e=>{e.preventDefault();if(!currentUser||!sb)return;
+ saveStatus.textContent='Guardando personalización...';
+ const badge=document.getElementById('badgeChoice').value;
+ const icon=document.getElementById('iconChoice').value;
+ const background=document.getElementById('backgroundChoice').value;
+ if(!allowed.badge.includes(badge)||!allowed.icon.includes(icon)||!allowed.background.includes(background)){saveStatus.textContent='Selección no permitida';return;}
+ const {data,error}=await sb.from('profiles').update({badge,icon,background,background_url:background==='custom'?(currentProfile?.background_url||''):''}).eq('id',currentUser.id).select().single();
+ if(error){saveStatus.textContent='Error: '+error.message;return;}
+ setProfile(data);saveStatus.textContent='¡Personalización guardada!';
+});
 document.getElementById('customBackground').addEventListener('change',async e=>{
- const file=e.target.files[0];if(!file)return;const status=document.getElementById('profileSaveStatus');if(file.size>4*1024*1024){status.textContent='La imagen supera los 4 MB.';return;}
- const body=new FormData();body.append('background',file);status.textContent='Subiendo fondo...';
- try{const response=await fetch('/api/profile/background',{method:'POST',credentials:'same-origin',headers:{'X-CSRF-Token':csrf},body});const data=await response.json();if(!response.ok)throw Error(data.error||'No se pudo subir');setProfile(data.profile);status.textContent='Fondo personalizado guardado.';}catch(err){status.textContent=err.message;}
-});start();
+ const file=e.target.files?.[0];if(!file||!currentUser||!sb)return;
+ if(file.size>4*1024*1024){saveStatus.textContent='La imagen supera los 4 MB.';return;}
+ const mimeToExt={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
+ if(!mimeToExt[file.type]){saveStatus.textContent='Solo se permiten JPG, PNG o WEBP.';return;}
+ saveStatus.textContent='Subiendo fondo...';
+ const dest=currentUser.id+'/'+crypto.randomUUID()+'.'+mimeToExt[file.type];
+ const {error:uploadError}=await sb.storage.from('profile-backgrounds').upload(dest,file,{contentType:file.type,upsert:false});
+ if(uploadError){saveStatus.textContent='Error al subir: '+uploadError.message;return;}
+ const {data:urlData}=sb.storage.from('profile-backgrounds').getPublicUrl(dest);
+ const {data,error}=await sb.from('profiles').update({background:'custom',background_url:urlData.publicUrl}).eq('id',currentUser.id).select().single();
+ if(error){saveStatus.textContent='El archivo se subió, pero no se pudo guardar el fondo: '+error.message;return;}
+ setProfile(data);saveStatus.textContent='¡Fondo personalizado guardado!';
+});
+(async()=>{
+ if(!window.supabase?.createClient){msg('No se pudo cargar la biblioteca de Supabase. Revisa tu conexión.');return;}
+ sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
+ await refreshSession();
+ sb.auth.onAuthStateChange((event)=>{
+  if(event==='SIGNED_IN'||event==='SIGNED_OUT')setTimeout(refreshSession,0);
+ });
+})();
 })();
 </script></body></html>
