@@ -1,4 +1,4 @@
-OUTBREAK Rank Sync
+name: OUTBREAK Rank Sync
 
 on:
   workflow_dispatch:
