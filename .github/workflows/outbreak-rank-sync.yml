@@ -1,4 +1,5 @@
 name: OUTBREAK Rank Sync
+
 on:
   workflow_dispatch:
   schedule:
@@ -6,70 +7,108 @@ on:
 
 permissions: {}
 
-concurrency:
-  group: outbreak-rank-sync
-  cancel-in-progress: false
-
 jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
     env:
       MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
       MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_PWD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
       RANK_SYNC_TOKEN: ${{ secrets.RANK_SYNC_TOKEN }}
       RANK_ENDPOINT: https://iiavzxgblffistgpitne.supabase.co/functions/v1/outbreak-rank
 
     steps:
-      - name: Consultar TOP 5 y sincronizar
-        shell: bash
+      - name: Instalar conector MariaDB
+        run: npm install --no-audit --no-fund mariadb@3.5.2
+
+      - name: Sincronizar TOP 5
         run: |
-          set -euo pipefail
+          node <<'JS'
+          const mariadb = require('mariadb');
 
-          for key in MYSQL_HOST MYSQL_USER MYSQL_PWD MYSQL_DATABASE RANK_SYNC_TOKEN; do
-            if [[ -z "${!key}" ]]; then
-              echo "::error::Falta configurar $key"
-              exit 1
-            fi
-          done
+          async function sync() {
+            let db;
+            try {
+              db = await mariadb.createConnection({
+                host: process.env.MYSQL_HOST,
+                port: 3306,
+                user: process.env.MYSQL_USER,
+                password: process.env.MYSQL_PASSWORD,
+                database: process.env.MYSQL_DATABASE,
+                ssl: true,
+                connectTimeout: 15000
+              });
 
-          file="$(mktemp)"
-          trap 'rm -f "$file"' EXIT
+              console.log('MariaDB conectado');
 
-          docker run --rm -i -e MYSQL_PWD mariadb:11.8 mariadb \
-            --protocol=TCP --ssl --ssl-verify-server-cert \
-            --connect-timeout=15 --host="$MYSQL_HOST" --port=3306 \
-            --user="$MYSQL_USER" --database="$MYSQL_DATABASE" \
-            --batch --raw --skip-column-names > "$file" <<'SQL'
-          SELECT JSON_OBJECT('players', COALESCE(JSON_ARRAYAGG(
-            JSON_OBJECT(
-              'name_hex', name_hex,
-              'points', points,
-              'versus', versus,
-              'total', total,
-              'kills', kills,
-              'headshots', headshots,
-              'playtime', playtime,
-              'playtime_versus', playtime_versus
-            ) ORDER BY total DESC, steamid ASC
-          ), JSON_ARRAY()))
-          FROM (
-            SELECT steamid, HEX(name) AS name_hex, points,
-              points_survivors + points_infected AS versus,
-              points + points_survivors + points_infected +
-              points_realism + points_survival + points_scavenge_survivors +
-              points_scavenge_infected + points_realism_survivors +
-              points_realism_infected + points_mutations AS total,
-              kills, headshots, playtime, playtime_versus
-            FROM players ORDER BY total DESC, steamid ASC LIMIT 5
-          ) AS ranked;
-          SQL
+              const rows = await db.query(`
+                SELECT
+                  HEX(name) AS name_hex,
+                  points,
+                  points_survivors + points_infected AS versus,
+                  (
+                    points +
+                    points_survivors +
+                    points_infected +
+                    points_realism +
+                    points_survival +
+                    points_scavenge_survivors +
+                    points_scavenge_infected +
+                    points_realism_survivors +
+                    points_realism_infected +
+                    points_mutations
+                  ) AS total,
+                  kills,
+                  headshots,
+                  playtime,
+                  playtime_versus
+                FROM players
+                ORDER BY total DESC, steamid ASC
+                LIMIT 5
+              `);
 
-          jq -e '.players | type == "array" and length <= 5' "$file" >/dev/null
+              const players = rows.map(row =>
+                Object.fromEntries(
+                  Object.entries(row).map(([k,v]) => {
+                    if (typeof v === 'bigint') {
+                      v = Number(v);
+                      if (!Number.isSafeInteger(v))
+                        throw new Error('Invalid statistic');
+                    }
+                    return [k,v];
+                  })
+                )
+              );
 
-          curl --silent --show-error --fail --max-time 30 \
-            -H "Content-Type: application/json" \
-            -H "x-rank-token: $RANK_SYNC_TOKEN" \
-            --data-binary "@$file" "$RANK_ENDPOINT" | jq -e 'select(.ok == true)'
+              console.log('Jugadores:', players.length);
+
+              const response = await fetch(
+                process.env.RANK_ENDPOINT,
+                {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-rank-token': process.env.RANK_SYNC_TOKEN
+                  },
+                  body: JSON.stringify({players})
+                }
+              );
+
+              if (!response.ok)
+                throw new Error('Supabase HTTP ' + response.status);
+
+              console.log('Supabase:', await response.text());
+
+            } finally {
+              if (db) await db.end();
+            }
+          }
+
+          sync().catch(err => {
+            console.error(err.code || err.message);
+            process.exitCode = 1;
+          });
+          JS
