@@ -1,1 +1,75 @@
+name: OUTBREAK Rank Sync
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "3,13,23,33,43,53 * * * *"
 
+permissions: {}
+
+concurrency:
+  group: outbreak-rank-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PWD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      RANK_SYNC_TOKEN: ${{ secrets.RANK_SYNC_TOKEN }}
+      RANK_ENDPOINT: https://iiavzxgblffistgpitne.supabase.co/functions/v1/outbreak-rank
+
+    steps:
+      - name: Consultar TOP 5 y sincronizar
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for key in MYSQL_HOST MYSQL_USER MYSQL_PWD MYSQL_DATABASE RANK_SYNC_TOKEN; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error::Falta configurar $key"
+              exit 1
+            fi
+          done
+
+          file="$(mktemp)"
+          trap 'rm -f "$file"' EXIT
+
+          docker run --rm -i -e MYSQL_PWD mariadb:11.8 mariadb \
+            --protocol=TCP --ssl --ssl-verify-server-cert \
+            --connect-timeout=15 --host="$MYSQL_HOST" --port=3306 \
+            --user="$MYSQL_USER" --database="$MYSQL_DATABASE" \
+            --batch --raw --skip-column-names > "$file" <<'SQL'
+          SELECT JSON_OBJECT('players', COALESCE(JSON_ARRAYAGG(
+            JSON_OBJECT(
+              'name_hex', name_hex,
+              'points', points,
+              'versus', versus,
+              'total', total,
+              'kills', kills,
+              'headshots', headshots,
+              'playtime', playtime,
+              'playtime_versus', playtime_versus
+            ) ORDER BY total DESC, steamid ASC
+          ), JSON_ARRAY()))
+          FROM (
+            SELECT steamid, HEX(name) AS name_hex, points,
+              points_survivors + points_infected AS versus,
+              points + points_survivors + points_infected +
+              points_realism + points_survival + points_scavenge_survivors +
+              points_scavenge_infected + points_realism_survivors +
+              points_realism_infected + points_mutations AS total,
+              kills, headshots, playtime, playtime_versus
+            FROM players ORDER BY total DESC, steamid ASC LIMIT 5
+          ) AS ranked;
+          SQL
+
+          jq -e '.players | type == "array" and length <= 5' "$file" >/dev/null
+
+          curl --silent --show-error --fail --max-time 30 \
+            -H "Content-Type: application/json" \
+            -H "x-rank-token: $RANK_SYNC_TOKEN" \
+            --data-binary "@$file" "$RANK_ENDPOINT" | jq -e 'select(.ok == true)'
